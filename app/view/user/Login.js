@@ -1,7 +1,7 @@
 //视图
 //登录页
 Ext.define('Bitcoin.view.user.Login', {
-    extend: 'app.view.widget.LockingWindow',
+    extend: 'Bitcoin.view.widget.LockingWindow',
     xtype: 'login',
     requires: ['Ext.form.field.Checkbox'],
     controller: 'user',
