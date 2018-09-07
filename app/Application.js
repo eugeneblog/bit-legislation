@@ -8,14 +8,14 @@ Ext.define('Bitcoin.Application', {
 
     name: 'Bitcoin',
 
-    quickTips: false,
-    platformConfig: {
+    quickTips: false,   //关闭快速提示
+    platformConfig: {    
         desktop: {
             quickTips: true
         }
     },
 
-    onAppUpdate: function () {
+    onAppUpdate: function () {   //application 更新事件
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
             function (choice) {
                 if (choice === 'yes') {

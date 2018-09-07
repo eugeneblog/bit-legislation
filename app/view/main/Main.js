@@ -1,104 +1,77 @@
-/**
- * This class is the main view for the application. It is specified in app.js as the
- * "mainView" property. That setting automatically applies the "viewport"
- * plugin causing this view to become the body element (i.e., the viewport).
- *
- * TODO - Replace this content of this view to suite the needs of your application.
- */
-Ext.define('Bitcoin.view.main.Main', {
-    extend: 'Ext.tab.Panel',
-    xtype: 'app-main',
 
+Ext.define('Bitcoin.view.main.Main',{
+    extend: 'Ext.container.Viewport',
     requires: [
-        'Ext.plugin.Viewport',
-        'Ext.window.MessageBox',
-
-        'Bitcoin.view.main.MainController',
-        'Bitcoin.view.main.MainModel',
-        'Bitcoin.view.main.List'
+        
     ],
-
     controller: 'main',
     viewModel: 'main',
+    itemId: 'mainView',
+    layout: {
+        type: 'vbox',
+        //子试图铺满容器
+        align: 'stretch'
+    },
 
-    ui: 'navigation',
-
-    tabBarHeaderPosition: 1,
-    titleRotation: 0,
-    tabRotation: 0,
-
-    header: {
-        layout: {
-            align: 'stretchmax'
-        },
-        title: {
+    items:[
+        {
+            xtype: 'toolbar',
+            cls: 'sencha-dash-dash-headerbar shadow',
+            height: 64,
+            itemId: 'headerBar',
+            title:'aa',
+            hidden: true,
             bind: {
-                text: '{name}'
+                hidden: '{isHideMain}'
             },
-            flex: 0
-        },
-        iconCls: 'fa-th-list'
-    },
-
-    tabBar: {
-        flex: 1,
-        layout: {
-            align: 'stretch',
-            overflowHandler: 'none'
-        }
-    },
-
-    responsiveConfig: {
-        tall: {
-            headerPosition: 'top'
-        },
-        wide: {
-            headerPosition: 'left'
-        }
-    },
-
-    defaults: {
-        bodyPadding: 20,
-        tabConfig: {
-            plugins: 'responsive',
-            responsiveConfig: {
-                wide: {
-                    iconAlign: 'left',
-                    textAlign: 'left'
-                },
-                tall: {
-                    iconAlign: 'top',
-                    textAlign: 'center',
-                    width: 120
+            items: [
+                {
+                    xtype: 'component',
+                    reference: 'senchaLogo',
+                    cls: 'sencha-logo',
+                    html: '<div class="main-logo"><img src="resources/images/logo/company-logo.png">Sencha</div>',
+                    //宽度与导航菜单栏宽度相同
+                    width: 250
+                },{
+                    //菜单折叠/展开按钮
+                    margin: '0 0 0 8',
+                    ui: 'header',
+                    iconCls: 'x-fa fa-navicon',
+                    id: 'main-navigation-btn',
+                    handler: 'onToggleNavigationSize'
+                },'->', {
+                    //帮助按钮
+                    iconCls: 'x-fa fa-question',
+                    ui: 'header',
+                    //触发路由
+                    href: '#view.faq',
+                    //本页打开
+                    hrefTarget: '_self',
+                    tooltip: '帮助'
+                },{
+                    //退出登录按钮
+                    iconCls: 'x-fa fa-sign-out',
+                    ui: 'header',
+                    tooltip: '退出登录',
+                    handler: 'onLoginOut'
+                },{
+                    //相当于一个label
+                    xtype: 'tbtext',
+                    //动态绑定名称
+                    bind: '{userData.fullName}'
+                },{
+                     //图片
+                     xtype: 'image',
+                     cls: 'header-right-profile-image',
+                     height: 35,
+                     width: 35,
+                     alt: '当前用户图像',
+                     //动态绑定头像
+                     bind: {
+                         src: '{userData.img}'
+                     }
                 }
-            }
+            ]
         }
-    },
-
-    items: [{
-        title: 'Home',
-        iconCls: 'fa-home',
-        // The following grid shares a store with the classic version's grid as well!
-        items: [{
-            xtype: 'mainlist'
-        }]
-    }, {
-        title: 'Users',
-        iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Groups',
-        iconCls: 'fa-users',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Settings',
-        iconCls: 'fa-cog',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }]
-});
+    ]
+})

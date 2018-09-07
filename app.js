@@ -10,7 +10,10 @@ Ext.application({
     requires: [
         // This will automatically load all classes in the Bitcoin namespace
         // so that application classes do not need to require each other.
-        'Bitcoin.*'
+        'Bitcoin.*',
+        'Bitcoin.config.Config',
+        'Ext.grid.*',
+        'Ext.grid.plugin.*'
     ],
 
     // The name of the initial view to create.
