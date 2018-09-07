@@ -14,6 +14,14 @@ Ext.define('Bitcoin.view.main.MainModel', {
         userData: {
             fullName: 'Eugene',
             img: '/resources/images/user/WechatIMG49.png'
+        },
+
+        currentView: null
+    },
+    stores: {
+        //默认视图数据源
+        views: {
+            type: 'views'
         }
     }
 

@@ -11,7 +11,7 @@ Ext.application({
         // This will automatically load all classes in the Bitcoin namespace
         // so that application classes do not need to require each other.
         'Bitcoin.*',
-        'Bitcoin.config.Config',
+        'Bitcoin.config.*',
         'Ext.grid.*',
         'Ext.grid.plugin.*'
     ],
